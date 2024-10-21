@@ -1,3 +1,9 @@
+## v0.3.0 (2024-10-21)
+
+### Feat
+
+- **synchronise**: added synchronise action
+
 ## v0.2.0 (2024-10-21)
 
 ### Feat
