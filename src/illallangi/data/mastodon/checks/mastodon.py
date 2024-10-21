@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.core.checks import CheckMessage, Error, register
 
-REQUIRED_KEYS = []
+REQUIRED_KEYS = [
+    "mastodon_user",
+]
 
 
 @register("settings")

@@ -15,6 +15,7 @@ dependencies = [
     "django-sqids>=0.2.1",
     "django>=5.1.2",
     "djp",
+    "illallangi-mastodon>=0.3.5",
 ]
 keywords = [
     "django",
