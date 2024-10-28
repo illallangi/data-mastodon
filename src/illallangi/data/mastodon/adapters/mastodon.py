@@ -1,6 +1,7 @@
 from typing import ClassVar
 
 import diffsync
+from yarl import URL
 
 from illallangi.data.mastodon.diffsyncmodels import Status
 from illallangi.data.mastodon.models import Status as DjangoStatus
@@ -22,7 +23,7 @@ class MastodonAdapter(diffsync.Adapter):
             self.add(
                 Status(
                     pk=obj.pk,
-                    url=obj.url,
+                    url=URL(obj.url),
                     content=obj.content,
                     datetime=obj.datetime,
                 ),

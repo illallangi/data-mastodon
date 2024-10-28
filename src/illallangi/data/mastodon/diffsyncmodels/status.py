@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import diffsync
+from yarl import URL
 
 from illallangi.data.mastodon.models.status import Status as ModelStatus
 
@@ -8,17 +9,19 @@ from illallangi.data.mastodon.models.status import Status as ModelStatus
 class Status(
     diffsync.DiffSyncModel,
 ):
-    pk: int
-    url: str
-    content: str
-    datetime: datetime
-
     _modelname = "Status"
     _identifiers = ("url",)
     _attributes = (
         "content",
         "datetime",
     )
+
+    pk: int
+
+    url: URL
+
+    content: str
+    datetime: datetime
 
     @classmethod
     def create(

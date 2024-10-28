@@ -18,27 +18,27 @@ def urlpatterns() -> list[URLPattern]:
     return [
         re_path(
             r"^statuses/$",
-            views.statuses_html,
-            name="statuses_html",
+            views.status_list,
+            name="status_list",
         ),
         re_path(
-            r"^statuses/(?P<status_year>[0-9]{4})/$",
-            views.statuses_html,
-            name="statuses_year",
+            r"^statuses/(?P<datetime__year>[0-9]{4})/$",
+            views.status_list,
+            name="status_year",
         ),
         re_path(
-            r"^statuses/(?P<status_year>[0-9]{4})/(?P<status_month>[0-9]{2})/$",
-            views.statuses_html,
-            name="statuses_month",
+            r"^statuses/(?P<datetime__year>[0-9]{4})/(?P<datetime__month>[0-9]{2})/$",
+            views.status_list,
+            name="status_month",
         ),
         re_path(
-            r"^statuses/(?P<status_year>[0-9]{4})/(?P<status_month>[0-9]{2})/(?P<status_day>[0-9]{2})/$",
-            views.statuses_html,
-            name="statuses_day",
+            r"^statuses/(?P<datetime__year>[0-9]{4})/(?P<datetime__month>[0-9]{2})/(?P<datetime__day>[0-9]{2})/$",
+            views.status_list,
+            name="status_day",
         ),
         re_path(
-            r"^statuses/(?P<status_year>[0-9]{4})/(?P<status_month>[0-9]{2})/(?P<status_day>[0-9]{2})/(?P<status_slug>[\w\d-]+)/$",
-            views.status_html,
-            name="status_html",
+            r"^statuses/(?P<datetime__year>[0-9]{4})/(?P<datetime__month>[0-9]{2})/(?P<datetime__day>[0-9]{2})/(?P<slug>[\w\d-]+)/$",
+            views.status_detail,
+            name="status_detail",
         ),
     ]

@@ -1,7 +1,5 @@
 from autoslug import AutoSlugField
 from django.db import models
-from django.urls import reverse
-from django_sqids import SqidsField
 
 
 class Status(
@@ -15,30 +13,31 @@ class Status(
 
     slug = AutoSlugField(
         populate_from="get_slug",
-        unique=True,
+        unique_with=(
+            "datetime__year",
+            "datetime__month",
+            "datetime__day",
+        ),
     )
 
-    sqid = SqidsField(
-        real_field_name="id",
-        min_length=6,
+    # Natural Keys
+
+    url = models.URLField(
+        blank=False,
+        null=False,
+        unique=True,
     )
 
     # Fields
 
-    url = models.URLField(
-        null=False,
-        blank=False,
-        unique=True,
-    )
-
     content = models.TextField(
-        null=False,
         blank=False,
+        null=False,
     )
 
     datetime = models.DateTimeField(
-        null=False,
         blank=False,
+        null=False,
     )
 
     # Methods
@@ -48,20 +47,7 @@ class Status(
     ) -> str:
         return f"Status {self.id}"
 
-    def get_absolute_url(
-        self,
-    ) -> str:
-        return reverse(
-            "status_html",
-            kwargs={
-                "status_slug": self.sqid,
-                "status_year": str(self.datetime.year).zfill(4),
-                "status_month": str(self.datetime.month).zfill(2),
-                "status_day": str(self.datetime.day).zfill(2),
-            },
-        )
-
     def get_slug(
         self,
     ) -> str:
-        return self.sqid
+        return "post"

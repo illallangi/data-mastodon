@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.conf import settings
-from django.db.models.signals import post_migrate
 
+from illallangi.django.data.signals import ready_for_models
 from illallangi.mastodon.adapters import MastodonAdapter
 
 
@@ -10,16 +10,16 @@ def add_model(
 ) -> None:
     from illallangi.django.data.models import Model, Synchronize
 
-    Model.objects.update_or_create(
+    Model.objects.create(
         description="Each status is a step towards discovering new horizons, embracing diverse cultures, and enriching your soul.",
         icon="mastodon/statuses.png",
         model="illallangi.data.mastodon.models.Status",
         plural="Statuses",
         singular="Status",
-        url="statuses_html",
+        url="status_list",
     )
 
-    Synchronize.objects.update_or_create(
+    Synchronize.objects.create(
         callable="illallangi.data.mastodon.apps.synchronize",
     )
 
@@ -31,9 +31,8 @@ class MastodonConfig(AppConfig):
     def ready(
         self,
     ) -> None:
-        post_migrate.connect(
+        ready_for_models.connect(
             add_model,
-            sender=self,
         )
 
 
