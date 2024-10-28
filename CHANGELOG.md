@@ -1,3 +1,9 @@
+## v0.5.0 (2024-10-28)
+
+### Feat
+
+- **django-data**: refactoring of code to support latest django-data
+
 ## v0.4.0 (2024-10-23)
 
 ### Feat
